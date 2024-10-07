@@ -35,7 +35,7 @@ class AlumniController extends Controller
             'nik' => 'required|unique:alumnis|max:16',
             'npwp' => 'nullable|max:16',
             'no_ijazah' => 'required|unique:alumnis|max:30',
-            'no_hp' => 'nullable|max:15',
+            'no_hp' => 'nullable|unique:alumnis|max:15',
             'email' => 'required|email|unique:alumnis|max:100',
         ]);
 

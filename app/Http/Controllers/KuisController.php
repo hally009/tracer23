@@ -27,6 +27,16 @@ class KuisController extends Controller
 
     }
 
+    public function blanko()
+    {
+        if (auth()->check()) {
+            return view('kuis.blanko_kuis');
+        } else {
+            return redirect('/'); // Atau halaman lain jika tidak terautentikasi
+        }
+
+    }
+
     public function showForm()
     {
     // Get the currently authenticated user ID
@@ -55,6 +65,16 @@ class KuisController extends Controller
         $validated = $request->validate([
             'id_akun' => 'required|string|unique:kuis',
             'q1' => 'required|string',
+            '1a' => 'required|string',  // 2. Dalam berapa bulan Anda mendapatkan pekerjaan pertama ?
+            'thp1' => 'required|string',  // 3. Berapa rata-rata pendapatan Anda per bulan? (take home pay)
+            'provinsi' => 'required|string',  // 4. Dimana lokasi tempat Anda bekerja?
+            'kabupaten' => 'required|string',  // 4. Dimana lokasi tempat Anda bekerja?
+            '1d' => 'required|string',  // 5. Apa jenis perusahaan/intansi/institusi tempat anda bekerja sekarang?
+            'custom_1d' => 'nullable|string',
+            '1e' => 'required|string',  // 6. Apa nama perusahaan/kantor tempat Anda bekerja?
+            '1f' => 'required|string',  // 7. Apa tingkat tempat kerja Anda?
+            '1g' => 'required|string', // 8. Seberapa erat hubungan bidang studi dengan pekerjaan Anda?
+            '1h' => 'required|string',  // 9. Tingkat pendidikan apa yang paling tepat/sesuai untuk pekerjaan anda saat ini?
             'q2' => 'required|string',
             'custom2' => 'nullable|string',
             'etika_a' => 'required|string',

@@ -37,7 +37,7 @@
     </div>
 @endif
 
-                        <form action="{{ route('kuis.store') }}" method="POST" id="sliderForm">
+                        <form action="" method="POST" id="sliderForm">
                           <!-- Section 1 -->
                           @csrf
                           <div class="form-section current-section" id="section1">
@@ -1183,7 +1183,7 @@
                             </div>
                             <hr>
                             <button type="button" class="btn btn-primary" onclick="moveSection(-1)">Sebelumnya</button>
-                            <button type="submit" class="btn btn-primary">Kirim</button>
+                            <!--<button type="submit" class="btn btn-primary">Kirim</button>-->
 
                           </div>
 

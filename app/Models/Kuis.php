@@ -16,6 +16,16 @@ class Kuis extends Model
     protected $fillable = [
         'id_akun',
         'q1',
+        '1a',  // 2. Dalam berapa bulan Anda mendapatkan pekerjaan pertama ?
+        'thp1',  // 3. Berapa rata-rata pendapatan Anda per bulan? (take home pay)
+        'provinsi',  // 4. Dimana lokasi tempat Anda bekerja?
+        'kabupaten',  // 4. Dimana lokasi tempat Anda bekerja?
+        '1d',  // 5. Apa jenis perusahaan/intansi/institusi tempat anda bekerja sekarang?
+        'custom_1d',
+        '1e',  // 6. Apa nama perusahaan/kantor tempat Anda bekerja?
+        '1f',  // 7. Apa tingkat tempat kerja Anda?
+        '1g', // 8. Seberapa erat hubungan bidang studi dengan pekerjaan Anda?
+        '1h',  // 9. Tingkat pendidikan apa yang paling tepat/sesuai untuk pekerjaan anda saat ini?
         'q2',
         'custom2',
         'etika_a',
@@ -63,4 +73,6 @@ class Kuis extends Model
     {
         return $this->belongsTo(Alumni::class, 'id_akun', 'id_akun');
     }
+
+
 }

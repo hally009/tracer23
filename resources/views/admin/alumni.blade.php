@@ -20,17 +20,19 @@
 
                 <div class="card">
                     <div class="card-body">
+                    @if(Auth::check() && Auth::user()->status === 'Puskar')
                         <div>
                             <h5 class="card-title" style="display: inline-block;">Daftar Alumni</h5>
                             <button type="button" class="btn btn-outline-primary float-sm-end" data-bs-toggle="modal" data-bs-target="#myModal">Tambah Alumni</button>
                         </div>
-
+                    @endif
                         <hr>
 
                         <!-- Table with stripped rows -->
                         <table class="table datatable">
                             <thead>
                                 <tr>
+                                    <th scope="col">NO</th>
                                     <th scope="col">AKUN</th>
                                     <th scope="col">NIM</th>
                                     <th scope="col">Nama</th>
@@ -40,13 +42,14 @@
                                     <th scope="col">No Ijazah</th>
                                     <th scope="col">No HP</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Aksi</th>
+                                    <!--<th scope="col">Aksi</th>-->
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($alumni as $alumnus)
                                     <tr>
-                                        <th scope="row">{{ $alumnus->id_akun }}</th>
+                                        <th scope="row">{{ $loop->iteration }}</th>
+                                        <td>{{ $alumnus->id_akun }}</td>
                                         <td>{{ $alumnus->nim }}</td>
                                         <td>{{ $alumnus->nama }}</td>
                                         <td>{{ $alumnus->prodi }}</td>
@@ -55,10 +58,10 @@
                                         <td>{{ $alumnus->no_ijazah }}</td>
                                         <td>{{ $alumnus->no_hp }}</td>
                                         <td>{{ $alumnus->email }}</td>
-                                        <td>
+                                        <!--<td>
                                             <i class="bx bxs-edit bx-sm" style="color:cornflowerblue;"></i>
                                             <i class="bx bxs-eraser bx-sm" style="color:cornflowerblue;"></i>
-                                        </td>
+                                        </td>-->
                                     </tr>
                                 @empty
                                     <tr>
@@ -144,7 +147,33 @@
                     <div class="row mb-3">
                         <label for="prodi" class="col-md-4 col-form-label text-md-end">Prodi</label>
                         <div class="col-md-6">
-                            <input id="prodi" type="text" class="form-control @error('prodi') is-invalid @enderror" name="prodi" value="{{ old('prodi') }}" required>
+                            <select id="prodi" class="form-control @error('prodi') is-invalid @enderror" name="prodi" required>
+                                <option value="">-- Pilih Prodi --</option>
+                                <option value="D3-PERIKLANAN" {{ old('prodi') == 'D3-PERIKLANAN' ? 'selected' : '' }}>D3-PERIKLANAN</option>
+                                <option value="D3-FOTOGRAFI" {{ old('prodi') == 'D3-FOTOGRAFI' ? 'selected' : '' }}>D3-FOTOGRAFI</option>
+                                <option value="D3-PENYIARAN" {{ old('prodi') == 'D3-PENYIARAN' ? 'selected' : '' }}>D3-PENYIARAN</option>
+                                <option value="D3-PENERBITAN" {{ old('prodi') == 'D3-PENERBITAN' ? 'selected' : '' }}>D3-PENERBITAN</option>
+                                <option value="D4-ANIMASI" {{ old('prodi') == 'D4-ANIMASI' ? 'selected' : '' }}>D4-ANIMASI</option>
+                                <option value="D3-PEMELIHARAAN MESIN" {{ old('prodi') == 'D3-PEMELIHARAAN MESIN' ? 'selected' : '' }}>D3-PEMELIHARAAN MESIN</option>
+                                <option value="D4-PENGELOLAAN PERHOTELAN" {{ old('prodi') == 'D4-PENGELOLAAN PERHOTELAN' ? 'selected' : '' }}>D4-PENGELOLAAN PERHOTELAN</option>
+                                <option value="D4-DESAIN MODE" {{ old('prodi') == 'D4-DESAIN MODE' ? 'selected' : '' }}>D4-DESAIN MODE</option>
+                                <option value="D3-TEKNIK KEMASAN" {{ old('prodi') == 'D3-TEKNIK KEMASAN' ? 'selected' : '' }}>D3-TEKNIK KEMASAN</option>
+                                <option value="D3-TEKNIK GRAFIKA" {{ old('prodi') == 'D3-TEKNIK GRAFIKA' ? 'selected' : '' }}>D3-TEKNIK GRAFIKA</option>
+                                <option value="D3-DESAIN GRAFIS" {{ old('prodi') == 'D3-DESAIN GRAFIS' ? 'selected' : '' }}>D3-DESAIN GRAFIS</option>
+                                <option value="D4-TEKNOLOGI PERMAINAN" {{ old('prodi') == 'D4-TEKNOLOGI PERMAINAN' ? 'selected' : '' }}>D4-TEKNOLOGI PERMAINAN</option>
+                                <option value="D3-SENI KULINER" {{ old('prodi') == 'D3-SENI KULINER' ? 'selected' : '' }}>D3-SENI KULINER</option>
+                                <option value="D4-TEKNOLOGI REKAYASA MULTIMEDIA" {{ old('prodi') == 'D4-TEKNOLOGI REKAYASA MULTIMEDIA' ? 'selected' : '' }}>D4-TEKNOLOGI REKAYASA MULTIMEDIA</option>
+                                <option value="D4-TEKNOLOGI REKAYASA PENGEMASAN" {{ old('prodi') == 'D4-TEKNOLOGI REKAYASA PENGEMASAN' ? 'selected' : '' }}>D4-TEKNOLOGI REKAYASA PENGEMASAN</option>
+                                <option value="D3-PENERBITAN (KAMPUS KOTA MEDAN)" {{ old('prodi') == 'D3-PENERBITAN (KAMPUS KOTA MEDAN)' ? 'selected' : '' }}>D3-PENERBITAN (KAMPUS KOTA MEDAN)</option>
+                                <option value="D3-PERIKLANAN (KAMPUS KOTA MAKASSAR)" {{ old('prodi') == 'D3-PERIKLANAN (KAMPUS KOTA MAKASSAR)' ? 'selected' : '' }}>D3-PERIKLANAN (KAMPUS KOTA MAKASSAR)</option>
+                                <option value="D3-PENERBITAN (KAMPUS KOTA MAKASSAR)" {{ old('prodi') == 'D3-PENERBITAN (KAMPUS KOTA MAKASSAR)' ? 'selected' : '' }}>D3-PENERBITAN (KAMPUS KOTA MAKASSAR)</option>
+                                <option value="D3-PERIKLANAN (KAMPUS KOTA MEDAN)" {{ old('prodi') == 'D3-PERIKLANAN (KAMPUS KOTA MEDAN)' ? 'selected' : '' }}>D3-PERIKLANAN (KAMPUS KOTA MEDAN)</option>
+                                <option value="D4-PRODUKSI FILM DAN TELEVISI" {{ old('prodi') == 'D4-PRODUKSI FILM DAN TELEVISI' ? 'selected' : '' }}>D4-PRODUKSI FILM DAN TELEVISI</option>
+                                <option value="D3-TEKNIK GRAFIKA (KAMPUS KOTA MAKASSAR)" {{ old('prodi') == 'D3-TEKNIK GRAFIKA (KAMPUS KOTA MAKASSAR)' ? 'selected' : '' }}>D3-TEKNIK GRAFIKA (KAMPUS KOTA MAKASSAR)</option>
+                                <option value="D3-DESAIN GRAFIS (KAMPUS KOTA MAKASSAR)" {{ old('prodi') == 'D3-DESAIN GRAFIS (KAMPUS KOTA MAKASSAR)' ? 'selected' : '' }}>D3-DESAIN GRAFIS (KAMPUS KOTA MAKASSAR)</option>
+                                <option value="D3-TEKNIK GRAFIKA (KAMPUS KOTA MEDAN)" {{ old('prodi') == 'D3-TEKNIK GRAFIKA (KAMPUS KOTA MEDAN)' ? 'selected' : '' }}>D3-TEKNIK GRAFIKA (KAMPUS KOTA MEDAN)</option>
+                                <option value="D3-DESAIN GRAFIS (KAMPUS KOTA MEDAN)" {{ old('prodi') == 'D3-DESAIN GRAFIS (KAMPUS KOTA MEDAN)' ? 'selected' : '' }}>D3-DESAIN GRAFIS (KAMPUS KOTA MEDAN)</option>
+                            </select>
 
                             @error('prodi')
                                 <span class="invalid-feedback" role="alert">
@@ -153,6 +182,7 @@
                             @enderror
                         </div>
                     </div>
+
 
                     <div class="row mb-3">
                         <label for="nik" class="col-md-4 col-form-label text-md-end">NIK</label>

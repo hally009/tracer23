@@ -40,8 +40,10 @@ class LoginController extends Controller
         // Cek status pengguna dan arahkan ke halaman yang sesuai
         if ($user->status === 'Responden') {
             return redirect('/form'); // Arahkan ke /kuis
-        } elseif ($user->status === 'Prodi') {
+        } elseif ($user->status === 'Puskar') {
             return redirect('/aktor'); // Arahkan ke /aktor
+        }elseif ($user->status === 'Prodi') {
+            return redirect('/responden'); // Arahkan ke /responden
         }
 
         // Jika status tidak cocok, arahkan ke halaman default

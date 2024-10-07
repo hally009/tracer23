@@ -47,6 +47,7 @@
                                     <option value="" disabled {{ old('status') ? '' : 'selected' }}>Pilih Status</option>
                                     <option value="Responden" {{ old('status') == 'Responden' ? 'selected' : '' }}>Responden</option>
                                     <option value="Prodi" {{ old('status') == 'Prodi' ? 'selected' : '' }}>Prodi</option>
+                                    <option value="Puskar" {{ old('status') == 'Puskar' ? 'selected' : '' }}>Puskar</option>
                                 </select>
 
                                 @error('status')

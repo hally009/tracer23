@@ -8,6 +8,7 @@ use App\Http\Controllers\KuisController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RespondenController;
+use App\Http\Controllers\PollingController;
 use App\Exports\AlumniExport;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -32,13 +33,14 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/kuis', [App\Http\Controllers\KuisController::class, 'index'])->name('kuis')->middleware('auth');
+Route::get('/blanko-kuis', [App\Http\Controllers\KuisController::class, 'blanko'])->name('blanko-kuis')->middleware('auth');
 Route::post('/kuis', [App\Http\Controllers\KuisController::class, 'store'])->name('kuis.store')->middleware('auth');
 Route::get('/form', [KuisController::class, 'showForm'])
     ->middleware('auth') // Ensure the user is logged in
     ->name('form.show');
 
 Route::get('/aktor', [App\Http\Controllers\AktorController::class, 'index'])->name('aktor')->middleware('auth');
-Route::post('/daftar', [AktorController::class, 'daftar'])->name('daftar');
+Route::post('/daftar', [AktorController::class, 'daftar'])->name('daftar')->middleware('auth');;
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 Route::get('/responden', [RespondenController::class, 'index'])->name('responden.index');
 Route::get('/navigate', [AktorController::class, 'navigate'])->name('navigate');
@@ -61,3 +63,5 @@ Route::post('/alumni', [App\Http\Controllers\AlumniController::class, 'store'])-
 //Route::delete('/alumni/{id}', [App\Http\Controllers\AlumniController::class, 'destroy'])->name('alumni.destroy')->middleware('auth');
 
 Route::get('/export-kuis', [KuisController::class, 'export'])->name('export.kuis');
+
+Route::get('/poll', [PollingController::class, 'showPollResults'])->name('polling')->middleware('auth');

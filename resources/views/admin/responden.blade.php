@@ -34,49 +34,73 @@
                             <table class="table datatable">
                                 <thead>
                                     <tr>
+                                        <th scope="col">NO</th>
                                         <th scope="col">Nama Alumni</th>
+                                        <th scope="col">Prodi</th>
                                         <th scope="col">Soal 1</th>
                                         <th scope="col">Soal 2</th>
-                                        <th scope="col">Jawaban lain 2</th>
-                                        <th scope="col">Soal 3 : Etika A</th>
-                                        <th scope="col">Soal 3 : Etika B</th>
-                                        <th scope="col">Soal 3 : Keahlian A</th>
-                                        <th scope="col">Soal 3 : Keahlian B</th>
-                                        <th scope="col">Soal 3 : B Inggris A</th>
-                                        <th scope="col">Soal 3 : B Inggris B</th>
-                                        <th scope="col">Soal 3 : TI A</th>
-                                        <th scope="col">Soal 3 : TI B</th>
-                                        <th scope="col">Soal 3 : Komunikasi A</th>
-                                        <th scope="col">Soal 3 : Komunikasi B</th>
-                                        <th scope="col">Soal 3 : Tim A</th>
-                                        <th scope="col">Soal 3 : Tim B</th>
-                                        <th scope="col">Soal 3 : Pengembangan A</th>
-                                        <th scope="col">Soal 3 : Pengembangan B</th>
-                                        <th scope="col">Soal 4 : Perkulihan</th>
-                                        <th scope="col">Soal 4 : Demonstrasi</th>
-                                        <th scope="col">Soal 4 : Riset</th>
-                                        <th scope="col">Soal 4 : Magang</th>
-                                        <th scope="col">Soal 4 : Praktikum</th>
-                                        <th scope="col">Soal 4 : Kerja Lapangan</th>
-                                        <th scope="col">Soal 4 : Diskusi</th>
+                                        <th scope="col">Soal 3</th>
+                                        <th scope="col">Soal 4 : Provinsi</th>
+                                        <th scope="col">Soal 4 : Kabupaten</th>
                                         <th scope="col">Soal 5</th>
+                                        <th scope="col">Jawaban lain (5)</th>
                                         <th scope="col">Soal 6</th>
-                                        <th scope="col">Jawaban Lainnya 6</th>
                                         <th scope="col">Soal 7</th>
                                         <th scope="col">Soal 8</th>
                                         <th scope="col">Soal 9</th>
                                         <th scope="col">Soal 10</th>
-                                        <th scope="col">Jawaban Lainnya 10</th>
-                                        <th scope="col">Soal 11</th>
-                                        <th scope="col">Jawaban Lainnya 11</th>
+                                        <th scope="col">Jawaban lain (10)</th>
+                                        <th scope="col">Soal 11 : Etika A</th>
+                                        <th scope="col">Soal 11 : Etika B</th>
+                                        <th scope="col">Soal 11 : Keahlian A</th>
+                                        <th scope="col">Soal 11 : Keahlian B</th>
+                                        <th scope="col">Soal 11 : B Inggris A</th>
+                                        <th scope="col">Soal 11 : B Inggris B</th>
+                                        <th scope="col">Soal 11 : Penggunaan Teknologi Informasi A</th>
+                                        <th scope="col">Soal 11 : Penggunaan Teknologi Informasi B</th>
+                                        <th scope="col">Soal 11 : Komunikasi A</th>
+                                        <th scope="col">Soal 11 : Komunikasi B</th>
+                                        <th scope="col">Soal 11 : Kerja sama tim A</th>
+                                        <th scope="col">Soal 11 : Kerja sama tim B</th>
+                                        <th scope="col">Soal 11 : Pengembangan A</th>
+                                        <th scope="col">Soal 11 : Pengembangan B</th>
+                                        <th scope="col">Soal 12 : Perkulihan</th>
+                                        <th scope="col">Soal 12 : Demonstrasi</th>
+                                        <th scope="col">Soal 12 : Riset</th>
+                                        <th scope="col">Soal 12 : Magang</th>
+                                        <th scope="col">Soal 12 : Praktikum</th>
+                                        <th scope="col">Soal 12 : Kerja Lapangan</th>
+                                        <th scope="col">Soal 12 : Diskusi</th>
+                                        <th scope="col">Soal 13</th>
+                                        <th scope="col">Soal 14</th>
+                                        <th scope="col">Jawaban Lainnya (14)</th>
+                                        <th scope="col">Soal 15</th>
+                                        <th scope="col">Soal 16</th>
+                                        <th scope="col">Soal 17</th>
+                                        <th scope="col">Soal 18</th>
+                                        <th scope="col">Jawaban Lainnya (18)</th>
+                                        <th scope="col">Soal 19</th>
+                                        <th scope="col">Jawaban Lainnya (19)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse ($kuis as $item)
                                         <tr>
                                             <!-- Menampilkan nama responden dari tabel alumnis -->
+                                            <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $item->alumnus->nama }}</td> <!-- Menggunakan relasi 'alumnus' -->
+                                            <td>{{ $item->alumnus->prodi }}</td>
                                             <td>{{ $item->q1 }}</td>
+                                            <td>{{ $item['1a'] }}</td>
+                                            <td>{{ $item->thp1 }}</td>
+                                            <td>{{ $item->provinsi }}</td>
+                                            <td>{{ $item->kabupaten }}</td>
+                                            <td>{{ $item['1d'] }}</td>
+                                            <td>{{ $item->custom_1d }}</td>
+                                            <td>{{ $item['1e'] }}</td>
+                                            <td>{{ $item['1f'] }}</td>
+                                            <td>{{ $item['1g'] }}</td>
+                                            <td>{{ $item['1h'] }}</td>
                                             <td>{{ $item->q2 }}</td>
                                             <td>{{ $item->custom2 }}</td>
                                             <td>{{ $item->etika_a }}</td>

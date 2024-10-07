@@ -10,8 +10,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="img/pmk.png" rel="icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -39,6 +38,7 @@
     .current-section {
       display: block;
     }
+
   </style>
 </head>
 
@@ -55,6 +55,7 @@
 
             @if(Auth::user()->status === 'Responden')
                 <!-- Only show Kuisioner link for Responden -->
+                <li><a href="#" class="nav-link scrollto"><i class="bx bx-user"></i> <span>{{ Auth::user()->name }}</span></a></li>
                 <li><a href="{{ route('kuis') }}" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Kuisioner</span></a></li>
                 <li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -66,10 +67,27 @@
                 </li>
             @elseif(Auth::user()->status === 'Prodi')
                 <!-- Show all links for Prodi users -->
-                <li><a href="{{ route('aktor') }}" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Akun</span></a></li>
-                <li><a href="{{ route('responden.index') }}" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Kuisioner</span></a></li>
+                <li><a href="#" class="nav-link scrollto"><i class="bx bx-user"></i> <span>{{ Auth::user()->name }}</span></a></li>
+                <li><a href="{{ route('blanko-kuis') }}" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Kuisioner</span></a></li>
+                <li><a href="{{ route('responden.index') }}" class="nav-link scrollto"><i class="bi-chat-text-fill"></i> <span>Responden</span></a></li>
                 <li><a href="{{ route('alumni') }}" class="nav-link scrollto"><i class="bx bx-user-voice"></i> <span>Alumni</span></a></li>
-                <li><a href="#" class="nav-link scrollto"><i class="bx bx-user-pin"></i> <span>Polling</span></a></li>
+                <li><a href="{{ route('polling') }}" class="nav-link scrollto"><i class="bx bx-user-pin"></i> <span>Polling</span></a></li>
+                <li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a href="#" class="nav-link scrollto" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="bx bx-exit"></i> <span>Keluar</span>
+                    </a>
+                </li>
+            @elseif(Auth::user()->status === 'Puskar')
+                <!-- Show all links for Prodi users -->
+                <li><a href="#" class="nav-link scrollto"><i class="bi-person-dash"></i> <span>{{ Auth::user()->name }}</span></a></li>
+                <li><a href="{{ route('aktor') }}" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Akun</span></a></li>
+                <li><a href="{{ route('blanko-kuis') }}" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Kuisioner</span></a></li>
+                <li><a href="{{ route('responden.index') }}" class="nav-link scrollto"><i class="bi-chat-text-fill"></i> <span>Responden</span></a></li>
+                <li><a href="{{ route('alumni') }}" class="nav-link scrollto"><i class="bx bx-user-voice"></i> <span>Alumni</span></a></li>
+                <li><a href="{{ route('polling') }}" class="nav-link scrollto"><i class="bx bx-user-pin"></i> <span>Polling</span></a></li>
                 <li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
