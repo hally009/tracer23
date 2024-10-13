@@ -168,6 +168,91 @@
                                     <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <div class="mb-3" id="soal2w">
+                                    <label class="form-label"><strong>2. Dalam berapa bulan setelah lulus anda memulai wiraswasta?</strong></label>
+                                    <input class="form-control" type="number" name="soal2_wiraswasta" id="soal2_wiraswasta" value="{{ old('soal2_wiraswasta') }}" placeholder="0">
+                                    @error('soal2_wiraswasta')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3" id="soal3w">
+                                    <label class="form-label"><strong>3. Bila berwiraswasta, apa posisi/jabatan Anda saat ini?</strong></label>
+                                    <div class="d-flex">
+                                        <div class="form-check me-3">
+                                            <select class="form-select" name="soal3_wiraswasta" id="soal3_wiraswasta">
+                                                <option value="">-- Silahkan Pilih --</option>
+                                                <option value="Founder" {{ old('soal3_wiraswasta') == 'Founder' ? 'selected' : '' }}>
+                                                    Founder
+                                                </option>
+                                                <option value="Co-Founder" {{ old('soal3_wiraswasta') == 'Co-Founder' ? 'selected' : '' }}>
+                                                    Co-Founder
+                                                </option>
+                                                <option value="Staff" {{ old('soal3_wiraswasta') == 'Staff' ? 'selected' : '' }}>
+                                                    Staff
+                                                </option>
+                                                <option value="Freelance/Kerja Lepas" {{ old('soal3_wiraswasta') == 'Freelance/Kerja Lepas' ? 'selected' : '' }}>
+                                                    Freelance/Kerja Lepas
+                                                </option>
+                                            </select>
+                                            @error('soal3_wiraswasta')
+                                            <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3" id="soal2p">
+                                    <label class="form-label"><strong>2. Pertanyaan studi lanjut</strong></label>
+                                    <div class="container">
+                                        <!-- Row for "Sumber Biaya" and "Perguruan Tinggi" -->
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Sumber Biaya</label>
+                                                        <select class="form-select" name="soalpendidikan_sumberbiaya" id="soalpendidikan_sumberbiaya">
+                                                            <option value="">-- Silahkan Pilih --</option>
+                                                            <option value="Biaya Sendiri" {{ old('soalpendidikan_sumberbiaya') == 'Biaya Sendiri' ? 'selected' : '' }}>
+                                                                Biaya Sendiri
+                                                            </option>
+                                                            <option value="Beasiswa" {{ old('soalpendidikan_sumberbiaya') == 'Beasiswa' ? 'selected' : '' }}>
+                                                                Beasiswa
+                                                            </option>
+                                                        </select>
+                                                        @error('soalpendidikan_sumberbiaya')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Perguruan Tinggi</label>
+                                                <input class="form-control" type="text" name="soal2_perguruan_tinggi" id="soal2_perguruan_tinggi" value="{{ old('soal2_perguruan_tinggi') }}" placeholder="Nama Perguruan Tinggi">
+                                                @error('soal2_perguruan_tinggi')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="container">
+                                        <!-- Row for "Program Studi" and "Tanggal Masuk" -->
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Program Studi</label>
+                                                <input class="form-control" type="text" name="soal2_program_studi" id="soal2_program_studi" value="{{ old('soal2_program_studi') }}" placeholder="Nama Program Studi">
+                                                @error('soal2_program_studi')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Tanggal Masuk</label>
+                                                <input class="form-control" type="date" name="soal2_tanggal_masuk" id="soal2_tanggal_masuk" value="{{ old('soal2_tanggal_masuk') }}">
+                                                @error('soal2_tanggal_masuk')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="mb-3" id="soal_1a">
                                     <label class="form-label"><strong>2. Dalam berapa bulan Anda mendapatkan pekerjaan pertama ?</strong></label>
                                     <input class="form-control" type="number" name="1a" id="1a" value="{{ old('1a') }}" placeholder="0">
@@ -180,6 +265,7 @@
                                     <div class="d-flex">
                                         <div class="form-check me-3">
                                             <select class="form-select" name="thp1" id="thp1">
+                                                <option value="">-- Silahkan Pilih --</option>
                                                 <option value="< 3000000" {{ old('thp1') == '< 3000000' ? 'selected' : '' }}>
                                                     < Rp. 3.000.000
                                                 </option>
@@ -1799,6 +1885,46 @@
             });
         }
     }
-    </script>
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Function to toggle visibility and required attribute of questions
+        function toggleQuestions() {
+            var selectedValue = $("input[name='q1']:checked").val();
+            if (selectedValue === 'bekerja') {
+                $('#soal_1a, #soal_1b, #soal_1c, #soal_1d , #soal_1e, #soal_1f, #soal_1g, #soal_1h').show(); // Show relevant questions
+                $('#1a, #thp1, #provinsi, #kabupaten, #1d, #1e, #1f, #1g, #1h').attr('required', true); // Make fields required
+                $('#soal2w, #soal3w, #soal2p').hide(); // Hide wiraswasta and education-related questions
+                $('#soal2_wiraswasta, #soal3_wiraswasta, #soalpendidikan_sumberbiaya, #soal2_perguruan_tinggi, #soal2_program_studi, #soal2_tanggal_masuk').removeAttr('required'); // Remove required attribute
+            } else if (selectedValue === 'wiraswasta') {
+                $('#soal2w, #soal3w, #soal_1f').show(); // Show wiraswasta-related questions
+                $('#soal2_wiraswasta, #soal3_wiraswasta, #1f').attr('required', true); // Make these fields required
+                $('#soal_1a, #soal_1b, #soal_1c, #soal_1d, #soal_1e, #soal_1g, #soal_1h, #soal2p').hide(); // Hide employment and education questions
+                $('#1a, #thp1, #provinsi, #kabupaten, #1d, #1e, #1g, #1h, #soalpendidikan_sumberbiaya, #soal2_perguruan_tinggi, #soal2_program_studi, #soal2_tanggal_masuk').removeAttr('required');
+            } else if (selectedValue === 'melanjutkan pendidikan') {
+                $('#soal2p').show(); // Show education-related questions
+                $('#soalpendidikan_sumberbiaya, #soal2_perguruan_tinggi, #soal2_program_studi, #soal2_tanggal_masuk').attr('required', true); // Make these fields required
+                $('#soal_1a, #soal_1b, #soal_1c, #soal_1d, #soal_1e, #soal_1f, #soal_1g, #soal_1h, #soal2w, #soal3w').hide(); // Hide employment and wiraswasta-related questions
+                $('#1a, #thp1, #provinsi, #kabupaten, #1d, #1e, #1f, #1g, #1h, #soal2_wiraswasta, #soal3_wiraswasta').removeAttr('required');
+            } else {
+                $('#soal_1a, #soal_1b, #soal_1c, #soal_1d, #soal_1e, #soal_1f, #soal_1g, #soal_1h, #soal2w, #soal3w, #soal2p').hide(); // Hide all questions
+                $('#1a, #thp1, #provinsi, #kabupaten, #1d, #1e, #1f, #1g, #1h, #soal2_wiraswasta, #soal3_wiraswasta, #soalpendidikan_sumberbiaya, #soal2_perguruan_tinggi, #soal2_program_studi, #soal2_tanggal_masuk').removeAttr('required');
+            }
+        }
+
+        // Initial call to set correct visibility and required status on page load
+        toggleQuestions();
+
+        // Add event listener to radio buttons
+        $("input[name='q1']").change(function() {
+            toggleQuestions();
+        });
+    });
+</script>
+
+
 
 @endsection

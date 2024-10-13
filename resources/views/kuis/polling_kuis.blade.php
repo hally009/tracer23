@@ -561,7 +561,7 @@ const pollingChartQ9 = new Chart(ctxQ9, {
     data: {
         labels: {!! json_encode($labelsQ9) !!},
         datasets: [{
-            label: 'Hasil Polling Soal 12',
+            label: 'Hasil Polling Soal 18',
             data: {!! json_encode($dataQ9) !!},
             backgroundColor: [
                 'rgba(153, 102, 255, 0.2)',
@@ -588,7 +588,7 @@ const pollingChartQ9 = new Chart(ctxQ9, {
             },
             title: {
                 display: true,
-                text: 'Hasil Polling Soal 12'
+                text: 'Aktif mencari pekerjaan dalam 4 minggu terakhir'
             },
             datalabels: {
                 formatter: (value, context) => {

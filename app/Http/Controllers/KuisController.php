@@ -57,24 +57,29 @@ class KuisController extends Controller
     }
 
     // Store a newly created quiz in the database
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         \Log::info('Request reached store method', $request->all());
-        //dd($request->all());
+
         // Validate the request
         $validated = $request->validate([
-            'id_akun' => 'required|string|unique:kuis',
+            'id_akun' => 'required|integer|unique:kuis,id_akun',
             'q1' => 'required|string',
-            '1a' => 'required|string',  // 2. Dalam berapa bulan Anda mendapatkan pekerjaan pertama ?
-            'thp1' => 'required|string',  // 3. Berapa rata-rata pendapatan Anda per bulan? (take home pay)
-            'provinsi' => 'required|string',  // 4. Dimana lokasi tempat Anda bekerja?
-            'kabupaten' => 'required|string',  // 4. Dimana lokasi tempat Anda bekerja?
-            '1d' => 'required|string',  // 5. Apa jenis perusahaan/intansi/institusi tempat anda bekerja sekarang?
+            'soal2_wiraswasta' => 'required_if:q1,wiraswasta|nullable|string',
+            'soal3_wiraswasta' => 'required_if:q1,wiraswasta|nullable|string',
+            'soalpendidikan_sumberbiaya' => 'required_if:q1,melanjutkan pendidikan|nullable|string',
+            'soal2_perguruan_tinggi' => 'required_if:q1,melanjutkan pendidikan|nullable|string',
+            'soal2_program_studi' => 'required_if:q1,melanjutkan pendidikan|nullable|string',
+            'soal2_tanggal_masuk' => 'required_if:q1,melanjutkan pendidikan|nullable|date',
+            '1a' => 'required_if:q1,bekerja|nullable|string',
+            'thp1' => 'required_if:q1,bekerja|nullable|string',
+            'provinsi' => 'required_if:q1,bekerja|nullable|string',
+            'kabupaten' => 'required_if:q1,bekerja|nullable|string',
+            '1d' => 'required_if:q1,bekerja|nullable|string',
             'custom_1d' => 'nullable|string',
-            '1e' => 'required|string',  // 6. Apa nama perusahaan/kantor tempat Anda bekerja?
-            '1f' => 'required|string',  // 7. Apa tingkat tempat kerja Anda?
-            '1g' => 'required|string', // 8. Seberapa erat hubungan bidang studi dengan pekerjaan Anda?
-            '1h' => 'required|string',  // 9. Tingkat pendidikan apa yang paling tepat/sesuai untuk pekerjaan anda saat ini?
+            '1e' => 'required_if:q1,bekerja|nullable|string',
+            '1f' => 'required_if:q1,bekerja|required_if:q1,wiraswasta|nullable|string',
+            '1g' => 'required_if:q1,bekerja|nullable|string',
+            '1h' => 'required_if:q1,bekerja|nullable|string',
             'q2' => 'required|string',
             'custom2' => 'nullable|string',
             'etika_a' => 'required|string',
@@ -99,27 +104,42 @@ class KuisController extends Controller
             'kerja_lapangan' => 'required|string',
             'diskusi' => 'required|string',
             'q5' => 'required|string',
-            'search_method' => 'required|array', // Memastikan q11 adalah array
-            'search_method.*' => 'string', // Memastikan setiap elemen dalam q11 adalah string
+            'search_method' => 'required|array',
+            'search_method.*' => 'string',
             'other_search_method' => 'nullable|string',
             'q7' => 'required|string',
             'q8' => 'required|string',
             'q9' => 'required|string',
             'q10' => 'required|string',
             'lainnya_q10' => 'nullable|string',
-            'q11' => 'required|array', // Memastikan q11 adalah array
-            'q11.*' => 'string', // Memastikan setiap elemen dalam q11 adalah string
-            'other_q11' => 'nullable|string', // Pastikan this is just a string
+            'q11' => 'required|array',
+            'q11.*' => 'string',
+            'other_q11' => 'nullable|string',
+        ],[
+            'soal2_wiraswasta.required_if' => 'Field ini wajib diisi jika Anda memilih "Wiraswasta".',
+            'soal3_wiraswasta.required_if' => 'Field ini wajib diisi jika Anda memilih "Wiraswasta".',
+            'soalpendidikan_sumberbiaya.required_if' => 'Field ini wajib diisi jika Anda memilih "Melanjutkan Pendidikan".',
+            'soal2_perguruan_tinggi.required_if' => 'Field ini wajib diisi jika Anda memilih "Melanjutkan Pendidikan".',
+            'soal2_program_studi.required_if' => 'Field ini wajib diisi jika Anda memilih "Melanjutkan Pendidikan".',
+            'soal2_tanggal_masuk.required_if' => 'Field ini wajib diisi jika Anda memilih "Melanjutkan Pendidikan".',
+            '1a.required_if' => 'Field ini wajib diisi jika Anda memilih "Bekerja".',
+            'thp1.required_if' => 'Field ini wajib diisi jika Anda memilih "Bekerja".',
+            'provinsi.required_if' => 'Field ini wajib diisi jika Anda memilih "Bekerja".',
+            'kabupaten.required_if' => 'Field ini wajib diisi jika Anda memilih "Bekerja".',
+            '1d.required_if' => 'Field ini wajib diisi jika Anda memilih "Bekerja".',
+            '1e.required_if' => 'Field ini wajib diisi jika Anda memilih "Bekerja".',
+            '1f.required_if' => 'Field ini wajib diisi jika Anda memilih "Bekerja atau Wiraswasta".',
+            '1g.required_if' => 'Field ini wajib diisi jika Anda memilih "Bekerja".',
+            '1h.required_if' => 'Field ini wajib diisi jika Anda memilih "Bekerja".'
         ]);
 
 
-        // Save the data to the database
-        Kuis::create($validated);
+        // Save the validated data to the database
+        $kuis = Kuis::create($validated);
 
-        return redirect()->route('kuis')->with('success', 'Kuis Berhasil Terkirim ! Terima Kasih Atas Partisipasi Anda, Semoga Amal Baik Menjadi Bekal Di Akhirat');
-
-
+        return redirect()->route('kuis')->with('success', 'Data berhasil disimpan! Terima Kasih Atas Partisipasi Anda, Semoga Amal Baik dibalas Tuhan Yang Maha Esa');
     }
+
 
     // Show a specific quiz
     public function show($id)

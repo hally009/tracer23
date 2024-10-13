@@ -16,6 +16,12 @@ class Kuis extends Model
     protected $fillable = [
         'id_akun',
         'q1',
+        'soal2_wiraswasta',
+        'soal3_wiraswasta',
+        'soalpendidikan_sumberbiaya',
+        'soal2_perguruan_tinggi',
+        'soal2_program_studi',
+        'soal2_tanggal_masuk',
         '1a',  // 2. Dalam berapa bulan Anda mendapatkan pekerjaan pertama ?
         'thp1',  // 3. Berapa rata-rata pendapatan Anda per bulan? (take home pay)
         'provinsi',  // 4. Dimana lokasi tempat Anda bekerja?
