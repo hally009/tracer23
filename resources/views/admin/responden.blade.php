@@ -38,8 +38,14 @@
                                         <th scope="col">Nama Alumni</th>
                                         <th scope="col">Prodi</th>
                                         <th scope="col">Soal 1</th>
-                                        <th scope="col">Soal 2</th>
-                                        <th scope="col">Soal 3</th>
+                                        <th scope="col">Soal 2 (Bekerja)</th>
+                                        <th scope="col">Soal 2 (Wiraswata)</th>
+                                        <th scope="col">Soal 2 (Melanjutkan Pendidikan-Sumber Biaya)</th>
+                                        <th scope="col">Soal 2 (Melanjutkan Pendidikan-Perguruan Tinggi)</th>
+                                        <th scope="col">Soal 2 (Melanjutkan Pendidikan-Program Studi)</th>
+                                        <th scope="col">Soal 2 (Melanjutkan Pendidikan-Tanggal Masuk)</th>
+                                        <th scope="col">Soal 3 (Bekerja)</th>
+                                        <th scope="col">Soal 3 (Wiraswasta)</th>
                                         <th scope="col">Soal 4 : Provinsi</th>
                                         <th scope="col">Soal 4 : Kabupaten</th>
                                         <th scope="col">Soal 5</th>
@@ -92,7 +98,13 @@
                                             <td>{{ $item->alumnus->prodi }}</td>
                                             <td>{{ $item->q1 }}</td>
                                             <td>{{ $item['1a'] }}</td>
+                                            <td>{{ $item['soal2_wiraswasta'] }}</td>
+                                            <td>{{ $item['soalpendidikan_sumberbiaya'] }}</td>
+                                            <td>{{ $item['soal2_perguruan_tinggi'] }}</td>
+                                            <td>{{ $item['soal2_program_studi'] }}</td>
+                                            <td>{{ $item['soal2_tanggal_masuk'] }}</td>
                                             <td>{{ $item->thp1 }}</td>
+                                            <td>{{ $item['soal3_wiraswasta'] }}</td>
                                             <td>{{ $item->provinsi }}</td>
                                             <td>{{ $item->kabupaten }}</td>
                                             <td>{{ $item['1d'] }}</td>

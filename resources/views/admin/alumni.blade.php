@@ -27,7 +27,7 @@
                         </div>
                     @endif
                         <hr>
-
+                        <div class="table-responsive">
                         <!-- Table with stripped rows -->
                         <table class="table datatable">
                             <thead>
@@ -70,6 +70,7 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        </div>
                         <!-- End Table with stripped rows -->
 
                     </div>
